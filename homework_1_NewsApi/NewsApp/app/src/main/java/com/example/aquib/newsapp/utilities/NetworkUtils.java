@@ -24,7 +24,7 @@ public class NetworkUtils {
 
     private static final String source = "the-next-web";
     private static final String sortBy = "latest";
-    private static final String apiKey = "46656d79737843f3bf6aaa24b3311e77";
+    private static final String apiKey = "";
 
     private static final String PARAM_QUERY = "source";
     private static final String SORT = "sortBy";
