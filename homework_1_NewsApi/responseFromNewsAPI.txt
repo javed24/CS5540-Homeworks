@@ -1,0 +1,87 @@
+{
+    "status": "ok",
+    "source": "the-next-web",
+    "sortBy": "latest",
+    "articles": [
+        {
+            "author": "TNW Deals",
+            "title": "Live a stress-free life with a lifetime of Aura’s premium meditation service for over 80 percent off",
+            "description": "You’re probably reading this post with a fidget spinner in your hands, aren’t you? Relieving stress and anxiety is almost a full-time job in itself, which has fueled a host of app ...",
+            "url": "https://thenextweb.com/offers/2017/06/17/live-stress-free-life-lifetime-auras-premium-meditation-service-80-percent-off/",
+            "urlToImage": "https://cdn3.tnwcdn.com/wp-content/blogs.dir/1/files/2017/06/rF7QP0z.jpg",
+            "publishedAt": "2017-06-17T17:33:44Z"
+        },
+        {
+            "author": "George Beall",
+            "title": "Robinhood’s plan to open financial markets to the masses",
+            "description": "While most were following the closure of Lehman Brothers and Bear Stearns during the 2008 financial crisis, there was another important change occurring: the rise of algorithmic trading.  ...",
+            "url": "https://thenextweb.com/contributors/2017/06/17/robinhoods-plan-open-financial-markets-masses/",
+            "urlToImage": "https://cdn3.tnwcdn.com/wp-content/blogs.dir/1/files/2017/06/Screen-Shot-2017-06-11-at-10.35.png",
+            "publishedAt": "2017-06-17T03:17:39Z"
+        },
+        {
+            "author": "Bryan Clark",
+            "title": "Inside the ‘conflict-free’ diamond scam costing online buyers millions [Updated]",
+            "description": "You can't help but stumble upon Brilliant Earth when searching for conflict-free diamonds online. It's perhaps the largest online retailer of stones from conflict-free regions and specializes ...",
+            "url": "https://thenextweb.com/insider/2017/06/17/shady-online-diamond-dealer-proves-conflict-free-is-no-guarantee/",
+            "urlToImage": "https://cdn2.tnwcdn.com/wp-content/blogs.dir/1/files/2017/05/blood-diamonds.jpg",
+            "publishedAt": "2017-06-17T00:20:32Z"
+        },
+        {
+            "author": "Bryan Clark",
+            "title": "Confirmed: Atari is making a console",
+            "description": "After reporting earlier this week that Atari seemed to be working on a new console (and hiring developers) we can now confirm both. CEO Fred Shesnais told GamesBeat today that everyones ...",
+            "url": "https://thenextweb.com/gaming/2017/06/16/confirmed-atari-making-console/",
+            "urlToImage": "https://cdn2.tnwcdn.com/wp-content/blogs.dir/1/files/2017/06/atari-logo.jpg",
+            "publishedAt": "2017-06-16T23:33:39Z"
+        },
+        {
+            "author": "Juan Buis",
+            "title": "Delete yourself from the internet by pressing this button",
+            "description": "The internet can be a beautiful and horrible place at the same time. It's weird, and sometimes you feel like you want to leave. Sadly, there's no easy way out -- or there wasn't, until ...",
+            "url": "https://thenextweb.com/apps/2017/06/16/delete-internet/",
+            "urlToImage": "https://cdn2.tnwcdn.com/wp-content/blogs.dir/1/files/2016/11/Screen-Shot-2016-11-24-at-10.41.10.png",
+            "publishedAt": "2017-06-16T22:45:51Z"
+        },
+        {
+            "author": "Nate Swanner",
+            "title": "Here’s the one thing everyone learning to code should do, no matter what",
+            "description": "When learning a new programming language (maybe even your first!), you’re going to have feelings of dread and despair. At some point, you won’t understand what’s going on with ...",
+            "url": "https://thenextweb.com/dd/2017/06/16/heres-the-one-thing-everyone-learning-to-code-should-do-no-matter-what/",
+            "urlToImage": "https://cdn3.tnwcdn.com/wp-content/blogs.dir/1/files/2015/06/shutterstock_234146047_code.jpg",
+            "publishedAt": "2017-06-16T22:40:03Z"
+        },
+        {
+            "author": "Melissa Thompson",
+            "title": "Technology and music in 2017: how tech is changing the universal language",
+            "description": "The development of music and how consumers listen has changed because of technology\r\n\r\nMusic has long stood as a constant, reliable part of human culture for millennia, but in the rise ...",
+            "url": "https://thenextweb.com/contributors/2017/06/16/technology-music-2017-tech-changing-universal-language/",
+            "urlToImage": "https://cdn2.tnwcdn.com/wp-content/blogs.dir/1/files/2017/06/turntable-1337986_1920.jpg",
+            "publishedAt": "2017-06-16T19:55:29Z"
+        },
+        {
+            "author": "Ana Grasic",
+            "title": "Blockchain technology – what it is, what are its use cases, and what it means for you",
+            "description": "Do a Google Image search for Bitcoin. What you’ll see is a lack of imagination.\r\n\r\n\r\n\r\nUniform stamped precious metal coins? That’s the opposite of what bitcoin is.You can’t flip ...",
+            "url": "https://thenextweb.com/contributors/2017/06/16/blockchain-technology-use-cases-means/",
+            "urlToImage": "https://cdn2.tnwcdn.com/wp-content/blogs.dir/1/files/2017/06/chain-2364831_1920.jpg",
+            "publishedAt": "2017-06-16T18:00:13Z"
+        },
+        {
+            "author": "George Beall",
+            "title": "How to build a rockstar website for your business on a tight budget",
+            "description": "It should go without saying that having a website for your business is imperative. Just last year a survey by Clutch had found that almost 46% of small businesses don’t have a website. ...",
+            "url": "https://thenextweb.com/contributors/2017/06/16/build-rockstar-website-business-tight-budget/",
+            "urlToImage": "https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2017/06/ipad-820272_1920.jpg",
+            "publishedAt": "2017-06-16T17:53:10Z"
+        },
+        {
+            "author": "TNW Deals",
+            "title": "Build Apple apps and get hired as a designer with this $35 learning package",
+            "description": "If you aren’t familiar with Swift 3 and you’re interested in app creation, it’s time to get on board. Swift 3 is the latest version of Apple’s proprietary programming language ...",
+            "url": "https://thenextweb.com/offers/2017/06/16/build-apple-apps-get-hired-designer-35-learning-package/",
+            "urlToImage": "https://cdn3.tnwcdn.com/wp-content/blogs.dir/1/files/2017/06/czwgn9K.jpg",
+            "publishedAt": "2017-06-16T17:33:38Z"
+        }
+    ]
+}
