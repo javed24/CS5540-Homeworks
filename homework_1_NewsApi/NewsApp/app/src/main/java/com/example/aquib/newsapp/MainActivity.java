@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         mNewsTextView = (TextView) findViewById(R.id.news_api_response);
         mNewsSpinningPB = (ProgressBar) findViewById(R.id.news_spinning_pb);
-        getResponseFromUrl();
+        //getResponseFromUrl();
     }
 
     private void getResponseFromUrl() {
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             mNewsSpinningPB.setVisibility(View.VISIBLE);
+            mNewsTextView.setVisibility(View.VISIBLE);
         }
 
         protected String doInBackground(URL... params) {
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             mNewsSpinningPB.setVisibility(View.INVISIBLE);
             if (newsSearchResults != null && !newsSearchResults.equals("")) {
                 mNewsTextView.setText(newsSearchResults);
-                mNewsTextView.setVisibility(View.INVISIBLE);
+                //mNewsTextView.setVisibility(View.INVISIBLE);
             } else {
                 mNewsTextView.setText("Error, try again.");
             }
@@ -76,7 +77,10 @@ public class MainActivity extends AppCompatActivity {
 //            Context context = MainActivity.this;
 //            String message = "Searching";
 //            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            mNewsTextView.setVisibility(View.VISIBLE);
+            mNewsTextView.setText("");
+            //mNewsTextView.setVisibility(View.VISIBLE);
+            getResponseFromUrl();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
