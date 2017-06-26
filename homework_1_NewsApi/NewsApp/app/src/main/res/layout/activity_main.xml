@@ -6,19 +6,20 @@
     android:layout_height="match_parent"
     tools:context="com.example.aquib.newsapp.MainActivity">
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_news"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"/>
 
-        <TextView
-            android:id="@+id/news_api_response"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textSize="20sp"
-            android:text="Click the Search button"
-            />
-    </ScrollView>
+    <TextView
+        android:id="@+id/news_error_message_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Error!"
+        android:textSize="20sp"
+        android:visibility="invisible" />
+
     <ProgressBar
         android:layout_width="42dp"
         android:layout_height="42dp"
