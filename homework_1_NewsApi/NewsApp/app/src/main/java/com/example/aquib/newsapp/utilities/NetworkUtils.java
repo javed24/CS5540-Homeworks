@@ -3,10 +3,17 @@ package com.example.aquib.newsapp.utilities;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.aquib.newsapp.model.NewsModel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static android.content.ContentValues.TAG;
@@ -24,7 +31,7 @@ public class NetworkUtils {
 
     private static final String source = "the-next-web";
     private static final String sortBy = "latest";
-    private static final String apiKey = "";
+    private static final String apiKey = "46656d79737843f3bf6aaa24b3311e77";
 
     private static final String PARAM_QUERY = "source";
     private static final String SORT = "sortBy";
@@ -64,4 +71,23 @@ public class NetworkUtils {
             urlConnection.disconnect();
         }
     }
+    //parsing the JSON response
+    public static ArrayList<NewsModel> parseJSON(String json) throws JSONException {
+        ArrayList<NewsModel> result = new ArrayList<>();
+        JSONObject main = new JSONObject(json);
+        JSONArray articles = main.getJSONArray("articles");
+
+        for(int i = 0; i < articles.length(); i++){
+            JSONObject article = articles.getJSONObject(i);
+            String title = article.getString("title");
+            String description = article.getString("description");
+            String url = article.getString("url");
+            String publishedAt = article.getString("publishedAt");
+           // String url = article.getString("html_url");
+            NewsModel newsModel = new NewsModel(title, description, url, publishedAt);
+            result.add(newsModel);
+        }
+        return result;
+    }
+    //end parse
 }
