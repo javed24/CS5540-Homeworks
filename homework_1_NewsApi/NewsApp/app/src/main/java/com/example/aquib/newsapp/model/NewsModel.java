@@ -8,11 +8,21 @@ public class NewsModel {
     public String title;
     public String description;
     public String url;
+    public String publishedAt;
 
-    public NewsModel(String title, String description, String url) {
+    public String getPublishedAt() {
+        return publishedAt;
+    }
+
+    public void setPublishedAt(String publishedAt) {
+        this.publishedAt = publishedAt;
+    }
+
+    public NewsModel(String title, String description, String url, String publishedAt) {
         this.title = title;
         this.description = description;
         this.url = url;
+        this.publishedAt = publishedAt;
     }
 
     public String getTitle() {

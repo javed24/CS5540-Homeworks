@@ -75,18 +75,24 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
     class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView title;
         TextView url;
+        TextView description;
+        TextView publishedAt;
 
         ItemHolder(View view){
             super(view);
             title = (TextView)view.findViewById(R.id.news_title);
             url = (TextView)view.findViewById(R.id.news_url);
+            description = (TextView) view.findViewById(R.id.news_desc);
+            publishedAt = (TextView) view.findViewById(R.id.news_time);
             view.setOnClickListener(this);
         }
 
         public void bind(int pos){
             NewsModel news = mNewsData.get(pos);
             title.setText(news.getTitle());
-            url.setText(news.getUrl());
+            //url.setText(news.getUrl());
+            description.setText(news.getDescription());
+            publishedAt.setText(news.getPublishedAt());
         }
 
         @Override
