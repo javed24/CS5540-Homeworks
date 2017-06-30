@@ -15,36 +15,54 @@ import java.util.ArrayList;
  * Created by aquib on 6/25/17.
  */
 
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
     //private String [] mNewsData;
     private ArrayList<NewsModel> mNewsData;
-    public NewsAdapter(){
-
+    ItemClickListener listener;
+    public NewsAdapter(ArrayList<NewsModel> data, ItemClickListener listener){
+        this.mNewsData = data;
+        this.listener = listener;
     }
-    class NewsAdapterViewHolder extends RecyclerView.ViewHolder{
 
-        public final TextView mNewsTextView;
-
-        public NewsAdapterViewHolder (View view){
-            super(view);
-            mNewsTextView = (TextView) view.findViewById(R.id.news_app_data);
-        }
+    public interface ItemClickListener {
+        void onItemClick(int clickedItemIndex);
     }
+
+//    public NewsAdapter(){
+//
+//    }
+
+//    class NewsAdapterViewHolder extends RecyclerView.ViewHolder{
+//
+//        public final TextView mNewsTextView;
+//
+//        public NewsAdapterViewHolder (View view){
+//            super(view);
+//            mNewsTextView = (TextView) view.findViewById(R.id.news_app_data);
+//        }
+//    }
 
     @Override
-    public NewsAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ItemHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
         int layoutIdForListItem = R.layout.news_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-        return new NewsAdapterViewHolder(view);
+        return new ItemHolder(view);
     }
 
+//    @Override
+//    public void onBindViewHolder(NewsAdapterViewHolder newsAdapterViewHolder, int position) {
+//        //newsAdapterViewHolder.mNewsTextView.setText(String.valueOf(mNewsData.indexOf(position)));
+//        newsAdapterViewHolder.bind(position);
+//    }
+
+
     @Override
-    public void onBindViewHolder(NewsAdapterViewHolder newsAdapterViewHolder, int position) {
-        newsAdapterViewHolder.mNewsTextView.setText(String.valueOf(mNewsData.indexOf(position)));
+    public void onBindViewHolder(ItemHolder holder, int position) {
+        holder.bind(position);
     }
 
     @Override
@@ -54,10 +72,33 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
         }
         return mNewsData.size();
     }
-    public void setNewsData(ArrayList<NewsModel> newsData){
-        mNewsData = newsData;
-        /*Notifies the attached observers that the underlying data has been changed
-        *and any View reflecting the data set should refresh itself.*/
-        notifyDataSetChanged();
+    class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        TextView title;
+        TextView url;
+
+        ItemHolder(View view){
+            super(view);
+            title = (TextView)view.findViewById(R.id.news_title);
+            url = (TextView)view.findViewById(R.id.news_url);
+            view.setOnClickListener(this);
+        }
+
+        public void bind(int pos){
+            NewsModel news = mNewsData.get(pos);
+            title.setText(news.getTitle());
+            url.setText(news.getUrl());
+        }
+
+        @Override
+        public void onClick(View v) {
+            int pos = getAdapterPosition();
+            listener.onItemClick(pos);
+        }
     }
+//    public void setNewsData(ArrayList<NewsModel> newsData){
+//        mNewsData = newsData;
+//        /*Notifies the attached observers that the underlying data has been changed
+//        *and any View reflecting the data set should refresh itself.*/
+//        notifyDataSetChanged();
+//    }
 }

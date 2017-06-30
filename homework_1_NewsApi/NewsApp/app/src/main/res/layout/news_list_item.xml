@@ -9,6 +9,18 @@
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:padding="16dp"/>
+    <TextView
+        android:id="@+id/news_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/news_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
