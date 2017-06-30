@@ -36,6 +36,7 @@ project.properties
 *.ipr
 *.iws
 *.xml
+.idea/misc.xml
 
 # Gradle-based build
 .gradle
