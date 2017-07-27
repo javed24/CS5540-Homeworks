@@ -9,6 +9,7 @@ public class NewsModel {
     public String description;
     public String url;
     public String publishedAt;
+    public String imageUrl;
 
     public String getPublishedAt() {
         return publishedAt;
@@ -18,11 +19,12 @@ public class NewsModel {
         this.publishedAt = publishedAt;
     }
 
-    public NewsModel(String title, String description, String url, String publishedAt) {
+    public NewsModel(String title, String description, String url, String publishedAt, String imageUrl) {
         this.title = title;
         this.description = description;
         this.url = url;
         this.publishedAt = publishedAt;
+        this.imageUrl = imageUrl;
     }
 
     public String getTitle() {
@@ -47,5 +49,12 @@ public class NewsModel {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getImageUrl(){
+        return imageUrl;
+    }
+    public void setImageUrl(String imageUrl){
+        this.imageUrl = imageUrl;
     }
 }
