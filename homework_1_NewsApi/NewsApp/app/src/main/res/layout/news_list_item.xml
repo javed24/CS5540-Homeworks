@@ -25,11 +25,18 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"/>
 
-    <TextView
+<!--    <TextView
         android:id="@+id/news_url"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"/>
+        android:textSize="14sp"/> -->
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.25"
+        android:scaleType="fitCenter"/>
 
     <View
         android:layout_width="match_parent"

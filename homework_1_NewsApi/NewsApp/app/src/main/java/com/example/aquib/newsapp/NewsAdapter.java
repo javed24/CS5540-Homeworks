@@ -6,10 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.aquib.newsapp.db.Contract;
 import com.example.aquib.newsapp.model.NewsModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -63,22 +65,24 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
 //        newsAdapterViewHolder.bind(position);
 //    }
 
-
+    private String imageString = cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_IMAGE_URL));
     @Override
     public void onBindViewHolder(ItemHolder holder, int position) {
         holder.bind(holder, position);
+        getThumbnail(imageString, holder.image_view,holder.image_view.getContext());
     }
 
     @Override
     public int getItemCount() {
-//        if(mNewsData == null){
-//            return 0;
-//        }
-//        return mNewsData.size();
         return cursor.getCount();
     }
+    //adding thumbnail for picasso
+    private void getThumbnail(String imageUrl, ImageView imageView, Context context){
+        Picasso.with(context).load(imageUrl).resize(200, 250).into(imageView);
+    }
+
     class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        String articlename;
+        String article_title;
         String desc;
         String url;
         String publish_time;
@@ -87,6 +91,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
         //TextView url;
         TextView description;
         TextView publishedAt;
+        private ImageView image_view;
 
         ItemHolder(View view){
             super(view);
@@ -94,6 +99,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
             //url = (TextView)view.findViewById(R.id.news_url);
             description = (TextView) view.findViewById(R.id.news_desc);
             publishedAt = (TextView) view.findViewById(R.id.news_time);
+            image_view = (ImageView) view.findViewById(R.id.image_view);
             view.setOnClickListener(this);
         }
 
@@ -106,13 +112,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
 //        }
         public void bind (ItemHolder holder,int position){
             cursor.moveToPosition(position);
-            id=cursor.getLong(cursor.getColumnIndex(Contract.TABLE_ARTICLES._ID));
-            articlename=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_TITLE));
+            id = cursor.getLong(cursor.getColumnIndex(Contract.TABLE_ARTICLES._ID));
+            article_title=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_TITLE));
             desc=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_DESCRIPTION));
             url=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_NEWS_URL));
             publish_time=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_PUBLISHED));
 
-            title.setText(articlename);
+            title.setText(article_title);
             description.setText(desc);
             publishedAt.setText(publish_time);
 

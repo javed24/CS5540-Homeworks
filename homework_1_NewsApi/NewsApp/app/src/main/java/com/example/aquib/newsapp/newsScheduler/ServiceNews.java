@@ -40,11 +40,10 @@ public class ServiceNews extends com.firebase.jobdispatcher.JobService {
     }
     public static void updateDatabase(Context context){
         try {
-            URL newsURL = NetworkUtils.buildUrl();
-
-            String jsonResponse = NetworkUtils.getResponseFromHttpUrl(newsURL);
-            if (jsonResponse != null && !jsonResponse.isEmpty()) {
-                ArrayList<NewsModel> newsItems = NetworkUtils.parseJSON(jsonResponse);
+            URL targetUrl = NetworkUtils.buildUrl();
+            String newsSearchResults = NetworkUtils.getResponseFromHttpUrl(targetUrl);
+            if (newsSearchResults != null && !newsSearchResults.isEmpty()) {
+                ArrayList<NewsModel> newsItems = NetworkUtils.parseJSON(newsSearchResults);
                 SQLiteDatabase db = new DBHelper(context).getWritableDatabase();
                 DBUtils.updateNews(db, newsItems);
                 Log.d(TAG, "executed update after a minute");
