@@ -3,6 +3,7 @@ package com.example.aquib.newsapp;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
  */
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
+    private static final String TAG = "NewsAdapter";
     //private String [] mNewsData;
     private ArrayList<NewsModel> mNewsData;
     ItemClickListener listener;
@@ -65,11 +67,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
 //        newsAdapterViewHolder.bind(position);
 //    }
 
-    private String imageString = cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_IMAGE_URL));
+    //private String imageString = cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_IMAGE_URL));
     @Override
     public void onBindViewHolder(ItemHolder holder, int position) {
         holder.bind(holder, position);
-        getThumbnail(imageString, holder.image_view,holder.image_view.getContext());
+       // getThumbnail(imageString, holder.image_view,holder.image_view.getContext());
     }
 
     @Override
@@ -92,6 +94,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
         TextView description;
         TextView publishedAt;
         private ImageView image_view;
+        private String imageString;
 
         ItemHolder(View view){
             super(view);
@@ -117,6 +120,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
             desc=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_DESCRIPTION));
             url=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_NEWS_URL));
             publish_time=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_PUBLISHED));
+
+            //test getImage
+            imageString = cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_IMAGE_URL));
+            Log.d(TAG, ">>>>Image URl: "+ imageString);
+            getThumbnail(imageString, holder.image_view,holder.image_view.getContext());
 
             title.setText(article_title);
             description.setText(desc);
