@@ -50,7 +50,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         mRecylcerView.setHasFixedSize(true);
         //Scheduler.scheduleRefresh(this);
-        
+
+        //having the activity load from the current database into the recyclerview
+        db = new DBHelper(this).getReadableDatabase();
+        cursor = DBUtils.getAll(db);
+        mNewsAdapter = new NewsAdapter(cursor, this);
+        mRecylcerView.setAdapter(mNewsAdapter);
     }
 /*
     private void getResponseFromUrl() {
