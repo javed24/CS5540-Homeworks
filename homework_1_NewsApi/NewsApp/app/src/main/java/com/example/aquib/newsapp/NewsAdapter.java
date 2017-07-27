@@ -1,12 +1,14 @@
 package com.example.aquib.newsapp;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.aquib.newsapp.db.Contract;
 import com.example.aquib.newsapp.model.NewsModel;
 
 import java.util.ArrayList;
@@ -19,13 +21,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
     //private String [] mNewsData;
     private ArrayList<NewsModel> mNewsData;
     ItemClickListener listener;
-    public NewsAdapter(ArrayList<NewsModel> data, ItemClickListener listener){
-        this.mNewsData = data;
+    //adding cursor
+    private Cursor cursor;
+    public NewsAdapter(Cursor cursor, ItemClickListener listener){
+        this.cursor = cursor;
         this.listener = listener;
     }
 
     public interface ItemClickListener {
-        void onItemClick(int clickedItemIndex);
+        void onItemClick(Cursor cursor, int clickedItemIndex);
     }
 
 //    public NewsAdapter(){
@@ -62,43 +66,62 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
 
     @Override
     public void onBindViewHolder(ItemHolder holder, int position) {
-        holder.bind(position);
+        holder.bind(holder, position);
     }
 
     @Override
     public int getItemCount() {
-        if(mNewsData == null){
-            return 0;
-        }
-        return mNewsData.size();
+//        if(mNewsData == null){
+//            return 0;
+//        }
+//        return mNewsData.size();
+        return cursor.getCount();
     }
     class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        String articlename;
+        String desc;
+        String url;
+        String publish_time;
+        long id;
         TextView title;
-        TextView url;
+        //TextView url;
         TextView description;
         TextView publishedAt;
 
         ItemHolder(View view){
             super(view);
             title = (TextView)view.findViewById(R.id.news_title);
-            url = (TextView)view.findViewById(R.id.news_url);
+            //url = (TextView)view.findViewById(R.id.news_url);
             description = (TextView) view.findViewById(R.id.news_desc);
             publishedAt = (TextView) view.findViewById(R.id.news_time);
             view.setOnClickListener(this);
         }
 
-        public void bind(int pos){
-            NewsModel news = mNewsData.get(pos);
-            title.setText(news.getTitle());
-            //url.setText(news.getUrl());
-            description.setText(news.getDescription());
-            publishedAt.setText(news.getPublishedAt());
+//        public void bind(int pos){
+//            NewsModel news = mNewsData.get(pos);
+//            title.setText(news.getTitle());
+//            //url.setText(news.getUrl());
+//            description.setText(news.getDescription());
+//            publishedAt.setText(news.getPublishedAt());
+//        }
+        public void bind (ItemHolder holder,int position){
+            cursor.moveToPosition(position);
+            id=cursor.getLong(cursor.getColumnIndex(Contract.TABLE_ARTICLES._ID));
+            articlename=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_TITLE));
+            desc=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_DESCRIPTION));
+            url=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_NEWS_URL));
+            publish_time=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_PUBLISHED));
+
+            title.setText(articlename);
+            description.setText(desc);
+            publishedAt.setText(publish_time);
+
         }
 
         @Override
         public void onClick(View v) {
             int pos = getAdapterPosition();
-            listener.onItemClick(pos);
+            listener.onItemClick(cursor, pos);
         }
     }
 //    public void setNewsData(ArrayList<NewsModel> newsData){

@@ -27,6 +27,8 @@ public class DBUtils {
                 ContentValues cv = new ContentValues();
                 cv.put(Contract.TABLE_ARTICLES.COLUMN_NAME_TITLE,
                         newsItem.getTitle());
+                cv.put(Contract.TABLE_ARTICLES.COLUMN_NAME_AUTHOR,
+                        newsItem.getAuthor());
                 cv.put(Contract.TABLE_ARTICLES.COLUMN_NAME_DESCRIPTION,
                         newsItem.getDescription());
                 cv.put(Contract.TABLE_ARTICLES.COLUMN_NAME_PUBLISHED,

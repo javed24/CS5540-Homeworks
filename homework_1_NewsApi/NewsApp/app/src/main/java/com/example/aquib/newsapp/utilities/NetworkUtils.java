@@ -84,8 +84,9 @@ public class NetworkUtils {
             String url = article.getString("url");
             String publishedAt = article.getString("publishedAt");
             String imageUrl = article.getString("urlToImage");
+            String author = article.getString("author");
            // String url = article.getString("html_url");
-            NewsModel newsModel = new NewsModel(title, description, url, publishedAt, imageUrl);
+            NewsModel newsModel = new NewsModel(title, description, url, publishedAt, imageUrl, author);
             result.add(newsModel);
         }
         return result;
