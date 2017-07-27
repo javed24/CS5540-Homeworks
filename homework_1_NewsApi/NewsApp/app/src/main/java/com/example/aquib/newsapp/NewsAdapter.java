@@ -25,6 +25,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
     //private String [] mNewsData;
     private ArrayList<NewsModel> mNewsData;
     ItemClickListener listener;
+    Context context;
     //adding cursor
     private Cursor cursor;
     public NewsAdapter(Cursor cursor, ItemClickListener listener){
@@ -52,7 +53,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
 
     @Override
     public ItemHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        Context context = viewGroup.getContext();
+        context = viewGroup.getContext();
         int layoutIdForListItem = R.layout.news_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
@@ -71,16 +72,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
     @Override
     public void onBindViewHolder(ItemHolder holder, int position) {
         holder.bind(holder, position);
-       // getThumbnail(imageString, holder.image_view,holder.image_view.getContext());
     }
 
     @Override
     public int getItemCount() {
         return cursor.getCount();
-    }
-    //adding thumbnail for picasso
-    private void getThumbnail(String imageUrl, ImageView imageView, Context context){
-        Picasso.with(context).load(imageUrl).resize(200, 250).into(imageView);
     }
 
     class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -94,7 +90,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
         TextView description;
         TextView publishedAt;
         private ImageView image_view;
-        private String imageString;
+        private String imageURLString;
 
         ItemHolder(View view){
             super(view);
@@ -106,13 +102,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
             view.setOnClickListener(this);
         }
 
-//        public void bind(int pos){
-//            NewsModel news = mNewsData.get(pos);
-//            title.setText(news.getTitle());
-//            //url.setText(news.getUrl());
-//            description.setText(news.getDescription());
-//            publishedAt.setText(news.getPublishedAt());
-//        }
         public void bind (ItemHolder holder,int position){
             cursor.moveToPosition(position);
             id = cursor.getLong(cursor.getColumnIndex(Contract.TABLE_ARTICLES._ID));
@@ -122,9 +111,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
             publish_time=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_PUBLISHED));
 
             //test getImage
-            imageString = cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_IMAGE_URL));
-            Log.d(TAG, ">>>>Image URl: "+ imageString);
-            getThumbnail(imageString, holder.image_view,holder.image_view.getContext());
+            //fetching the url for the image and
+            imageURLString = cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_IMAGE_URL));
+            Log.d(TAG, "----->>>>Image URl: "+ imageURLString);
+            Picasso.with(context).load(imageURLString).into(image_view);
 
             title.setText(article_title);
             description.setText(desc);

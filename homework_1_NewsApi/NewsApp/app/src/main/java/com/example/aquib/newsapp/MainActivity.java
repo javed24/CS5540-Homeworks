@@ -50,9 +50,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         mRecylcerView.setHasFixedSize(true);
         //Scheduler.scheduleRefresh(this);
-        //mNewsAdapter = new NewsAdapter();
-       // mRecylcerView.setAdapter(mNewsAdapter);
-        //getResponseFromUrl();
+        
     }
 /*
     private void getResponseFromUrl() {
