@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mRecylcerView.setLayoutManager(layoutManager);
 
         mRecylcerView.setHasFixedSize(true);
-        Scheduler.scheduleRefresh(this);
+        //Scheduler.scheduleRefresh(this);
         //mNewsAdapter = new NewsAdapter();
        // mRecylcerView.setAdapter(mNewsAdapter);
         //getResponseFromUrl();
@@ -165,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             protected void onStartLoading() {
                 super.onStartLoading();
                 mNewsSpinningPB.setVisibility(View.VISIBLE);
+
             }
 
             @Override
@@ -214,5 +215,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Scheduler.scheduleRefresh(MainActivity.this);
     }
 }

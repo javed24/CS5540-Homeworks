@@ -3,6 +3,7 @@ package com.example.aquib.newsapp.newsScheduler;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.aquib.newsapp.db.DBHelper;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 
 public class ServiceNews extends com.firebase.jobdispatcher.JobService {
 
-
+    private static final String TAG = "ServiceNews";
     @Override
     public boolean onStartJob(com.firebase.jobdispatcher.JobParameters job) {
         new AsyncTask(){
@@ -46,6 +47,7 @@ public class ServiceNews extends com.firebase.jobdispatcher.JobService {
                 ArrayList<NewsModel> newsItems = NetworkUtils.parseJSON(jsonResponse);
                 SQLiteDatabase db = new DBHelper(context).getWritableDatabase();
                 DBUtils.updateNews(db, newsItems);
+                Log.d(TAG, "executed update after a minute");
             }
         } catch (Exception e) {
             e.printStackTrace();
