@@ -46,7 +46,7 @@ public class NetworkUtils {
         URL url = null;
         try {
             String urlString = builtUri.toString();
-            Log.d(TAG, "Generated URL: " + urlString);
+            Log.d(TAG, "----->>>>Generated URL: " + urlString);
             url = new URL(urlString);
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,5 +90,4 @@ public class NetworkUtils {
         }
         return result;
     }
-    //end parse
 }
