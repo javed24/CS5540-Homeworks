@@ -11,10 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.aquib.newsapp.db.Contract;
-import com.example.aquib.newsapp.model.NewsModel;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 /**
  * Created by aquib on 6/25/17.
@@ -23,7 +20,7 @@ import java.util.ArrayList;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
     private static final String TAG = "NewsAdapter";
     //private String [] mNewsData;
-    private ArrayList<NewsModel> mNewsData;
+    //private ArrayList<NewsModel> mNewsData;
     ItemClickListener listener;
     Context context;
     //adding cursor
@@ -36,20 +33,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
     public interface ItemClickListener {
         void onItemClick(Cursor cursor, int clickedItemIndex);
     }
-
-//    public NewsAdapter(){
-//
-//    }
-
-//    class NewsAdapterViewHolder extends RecyclerView.ViewHolder{
-//
-//        public final TextView mNewsTextView;
-//
-//        public NewsAdapterViewHolder (View view){
-//            super(view);
-//            mNewsTextView = (TextView) view.findViewById(R.id.news_app_data);
-//        }
-//    }
 
     @Override
     public ItemHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -110,28 +93,21 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemHolder> {
             url=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_NEWS_URL));
             publish_time=cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_PUBLISHED));
 
-            //test getImage
-            //fetching the url for the image and
+            //testing getImage using Picasso
+            //fetching the url for the image
             imageURLString = cursor.getString(cursor.getColumnIndex(Contract.TABLE_ARTICLES.COLUMN_NAME_IMAGE_URL));
             Log.d(TAG, "----->>>>Image URl: "+ imageURLString);
+            //making use of the Picasso API for loading the image from the url
             Picasso.with(context).load(imageURLString).into(image_view);
 
             title.setText(article_title);
             description.setText(desc);
             publishedAt.setText(publish_time);
-
         }
-
         @Override
         public void onClick(View v) {
             int pos = getAdapterPosition();
             listener.onItemClick(cursor, pos);
         }
     }
-//    public void setNewsData(ArrayList<NewsModel> newsData){
-//        mNewsData = newsData;
-//        /*Notifies the attached observers that the underlying data has been changed
-//        *and any View reflecting the data set should refresh itself.*/
-//        notifyDataSetChanged();
-//    }
 }

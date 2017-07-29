@@ -18,8 +18,7 @@ import com.firebase.jobdispatcher.Trigger;
 
 public class Scheduler {
     private static final int SCHEDULE_INTERVAL_MINUTES = 60;
-    private static final int SYNC_FLEXTIME_SECONDS = 60;
-    private static final String JOB_TAG = "scheduler_tag";
+    private static final String NEWS_JOB_TAG = "news_job_tag";
     private static final String TAG = "Scheduler";
 
     private static boolean sInitialized;
@@ -34,11 +33,11 @@ public class Scheduler {
 
         Job contraintRefresh = dispatcher.newJobBuilder()
                 .setService(ServiceNews.class)
-                .setTag(JOB_TAG)
+                .setTag(NEWS_JOB_TAG)
                 .setConstraints(Constraint.ON_ANY_NETWORK)
                 .setLifetime(Lifetime.FOREVER)
                 .setRecurring(true)
-                .setTrigger(Trigger.executionWindow(0, 20))
+                .setTrigger(Trigger.executionWindow(0, SCHEDULE_INTERVAL_MINUTES))
                 .setReplaceCurrent(true)
                 .build();
 

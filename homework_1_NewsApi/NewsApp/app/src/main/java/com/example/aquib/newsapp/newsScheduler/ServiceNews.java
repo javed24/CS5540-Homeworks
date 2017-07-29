@@ -21,16 +21,18 @@ import java.util.ArrayList;
 public class ServiceNews extends com.firebase.jobdispatcher.JobService {
 
     private static final String TAG = "ServiceNews";
+
     @Override
     public boolean onStartJob(com.firebase.jobdispatcher.JobParameters job) {
-        new AsyncTask(){
-            @Override
-            protected Object doInBackground(Object[] params) {
-                updateDatabase(ServiceNews.this);
-                return null;
-            }
-        }.execute();
-        Toast.makeText(ServiceNews.this, "Updated from source", Toast.LENGTH_LONG).show();
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    updateDatabase(ServiceNews.this);
+                    return null;
+                }
+            }.execute();
+        //checking if update after a certain interval works
+        Toast.makeText(ServiceNews.this, "Updated from source", Toast.LENGTH_SHORT).show();
         return false;
     }
 
@@ -38,7 +40,9 @@ public class ServiceNews extends com.firebase.jobdispatcher.JobService {
     public boolean onStopJob(com.firebase.jobdispatcher.JobParameters job) {
         return false;
     }
-    public static void updateDatabase(Context context){
+
+    //updates the database by calling the API again
+    public static void updateDatabase(Context context) {
         try {
             URL targetUrl = NetworkUtils.buildUrl();
             String newsSearchResults = NetworkUtils.getResponseFromHttpUrl(targetUrl);

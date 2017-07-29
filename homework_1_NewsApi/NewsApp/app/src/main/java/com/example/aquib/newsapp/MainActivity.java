@@ -84,16 +84,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return true;
     }
 
-    //    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int itemThatWasClicked = item.getItemId();
-//        if (itemThatWasClicked == R.id.news_search) {
-//            //mNewsTextView.setText("");
-//            getResponseFromUrl();
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemThatWasClicked = item.getItemId();
@@ -118,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 mNewsSpinningPB.setVisibility(View.VISIBLE);
 
             }
-
+            //performs the actual loading operation. Calls the url builder and parser methods similar to the doInBackground method for AsyncTask
             @Override
             public ArrayList<Void> loadInBackground() {
                 URL targetUrl = NetworkUtils.buildUrl();
@@ -136,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         };
     }
 
+    //gets executed once loader is done, gets all items from the db
+    // and notifies the attached observers that the underlying data has been changed
     @Override
     public void onLoadFinished(Loader<ArrayList<Void>> loader, ArrayList<Void> data) {
         mNewsSpinningPB.setVisibility(View.INVISIBLE);
@@ -144,7 +136,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mNewsAdapter = new NewsAdapter(cursor, this);
         mRecylcerView.setAdapter(mNewsAdapter);
         mNewsAdapter.notifyDataSetChanged();
-
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.example.aquib.newsapp.db;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.aquib.newsapp.model.NewsModel;
 
@@ -15,12 +14,14 @@ import java.util.ArrayList;
 
 public class DBUtils {
     public static final String TAG = "DBUtils";
+
     public static Cursor getAll(SQLiteDatabase db) {
         Cursor cursor = db.query(Contract.TABLE_ARTICLES.TABLE_NAME, null, null,
                 null, null, null,
                 Contract.TABLE_ARTICLES.COLUMN_NAME_PUBLISHED + " DESC");
         return cursor;
     }
+
     public static void updateNews(SQLiteDatabase db, ArrayList<NewsModel> newsItems) {
         db.beginTransaction();
         deleteAllItems(db);
@@ -45,9 +46,10 @@ public class DBUtils {
         } finally {
             db.endTransaction();
             db.close();
-            Log.d(TAG, "inside DBUtils update");
+            //Log.d(TAG, "inside DBUtils update");
         }
     }
+
     private static void deleteAllItems(SQLiteDatabase db) {
         db.delete(Contract.TABLE_ARTICLES.TABLE_NAME, null, null);
     }
