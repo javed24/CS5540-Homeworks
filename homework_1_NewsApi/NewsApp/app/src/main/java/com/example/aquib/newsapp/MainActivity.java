@@ -1,10 +1,12 @@
 package com.example.aquib.newsapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
@@ -51,83 +53,29 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mRecylcerView.setHasFixedSize(true);
         //Scheduler.scheduleRefresh(this);
 
-        //having the activity load from the current database into the recyclerview
+        //checking if the app was installed before, if not , loading data into db using network methods
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isFirst = prefs.getBoolean("isfirst", true);
+
+        if (isFirst) {
+            load();
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("isfirst", false);
+            editor.commit();
+        }
+
+        //loads data onto the recyclerview from the database
         db = new DBHelper(this).getReadableDatabase();
         cursor = DBUtils.getAll(db);
         mNewsAdapter = new NewsAdapter(cursor, this);
         mRecylcerView.setAdapter(mNewsAdapter);
     }
-/*
-    private void getResponseFromUrl() {
-        URL newsSearchUrl = NetworkUtils.buildUrl();
-        new getNewsResponse().execute(newsSearchUrl);
-    }*/
-
-    /*Asynctask from hw2
-    //public class getNewsResponse extends AsyncTask<URL, Void, String> {
-    public class getNewsResponse extends AsyncTask<URL, Void, ArrayList<NewsModel>> {
-
-        String query;
-        getNewsResponse(){
-
-        }
-        getNewsResponse(String s) {
-            query = s;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            mNewsSpinningPB.setVisibility(View.VISIBLE);
-            //mNewsTextView.setVisibility(View.VISIBLE);
-            mRecylcerView.setVisibility(View.VISIBLE);
-        }
-
-        protected ArrayList<NewsModel> doInBackground(URL... params) {
-            URL targetUrl = params[0];
-            String newsSearchResults = null;
-            ArrayList<NewsModel> newsModelResult = null;
-            try {
-                newsSearchResults = NetworkUtils.getResponseFromHttpUrl(targetUrl);
-                newsModelResult = NetworkUtils.parseJSON(newsSearchResults);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            // return newsSearchResults;
-            return newsModelResult;
-        }
-
-//        @Override
-//        protected void onPostExecute(String newsSearchResults) {
-//            mNewsSpinningPB.setVisibility(View.INVISIBLE);
-//            if (newsSearchResults != null && !newsSearchResults.equals("")) {
-//                mNewsTextView.setText(newsSearchResults);
-//                //mNewsTextView.setVisibility(View.INVISIBLE);
-//            } else {
-//                mNewsTextView.setText("Error, try again.");
-//            }
-//        }
-
-        @Override
-        protected void onPostExecute(final ArrayList<NewsModel> data) {
-            super.onPostExecute(data);
-            mNewsSpinningPB.setVisibility(View.INVISIBLE);
-            if (data != null) {
-                NewsAdapter adapter = new NewsAdapter(data, new NewsAdapter.ItemClickListener(){
-                    @Override
-                    public void onItemClick(int clickedItemIndex) {
-                        String url = data.get(clickedItemIndex).getUrl();
-                        Log.d(TAG, String.format("Url %s", url));
-                        openWebPage(url);
-                    }
-                });
-                //  mNewsAdapter.setNewsData(datum.getTitle());
-                mRecylcerView.setAdapter(adapter);
-            }
-        }
+    //load method for first time app installation
+    public void load() {
+        LoaderManager loaderManager = getSupportLoaderManager();
+        loaderManager.restartLoader(NEWS_LOADER, null, this).forceLoad();
 
     }
-    end AsyncTask from HW2 */
 
 
     @Override
@@ -202,13 +150,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<ArrayList<Void>> loader) {
 
-    }
-    public void openWebPage(String url) {
-        Uri webpage = Uri.parse(url);
-        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
     }
 
     @Override
